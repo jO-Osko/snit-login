@@ -5,10 +5,21 @@
     <title>Oddaja sporocila</title>
 </head>
 <body>
-  <form action="/rezultat" method="POST">
-    <label for="vnos-sporocilo">Sporocilo:</label>
-    <input id="vnos-sporocilo" type="text" name="vnos">
-    <button type="submit">Poslji</button>
-  </form>
+    {% if logiran %}
+        <h1>{{ user.nickname()}}</h1>
+      <form action="/rezultat" method="POST">
+        <label for="vnos-sporocilo">Sporocilo:</label>
+        <input id="vnos-sporocilo" type="text" name="vnos">
+        <button type="submit">Poslji</button>
+      </form>
+
+        <a href="{{ logout_url }}">Odjava</a>
+
+    {% else %}
+        <h1>Anonimni uporabnk, prosim <a href="{{ login_url }}">prijavi</a> se</h1>
+    {% endif %}
+
+
+
 </body>
 </html>

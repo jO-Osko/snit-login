@@ -4,6 +4,7 @@ import os
 
 import jinja2
 import webapp2
+from google.appengine.api import users
 
 from models import Sporocilo
 
@@ -32,7 +33,18 @@ class BaseHandler(webapp2.RequestHandler):
 
 class IndexHandler(BaseHandler):
     def get(self):
-        return self.render_template("index.html")
+        user = users.get_current_user()
+
+        if user:
+            logiran = True
+            logout_url = users.create_logout_url("/")
+            params = {"logiran": logiran, "logout_url": logout_url, "user": user}
+        else:
+            logiran = False
+            login_url = users.create_login_url("/")
+            params = {"logiran": logiran, "login_url": login_url, "user": user}
+
+        return self.render_template("index.html", params=params)
 
 
 class RezultatHandler(BaseHandler):
