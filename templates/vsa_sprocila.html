@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Seznam spročil</h1>
+
+    {%  for sporocilo in sporocila %}
+        <p>
+            <a href="/sporocilo/{{sporocilo.key.id()}}">
+
+            {{ sporocilo.key.id() }}, {{ sporocilo.besedilo }},
+            {{ sporocilo.poslano }}
+
+            </a>
+        </p>
+    {% endfor %}
+
+</body>
+</html>
